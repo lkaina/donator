@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3400" systemVersion="13A3017" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="OrgContact" representedClassName="OrgContact" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="contactToDetail" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="OrgDetail" inverseName="detailToContact" inverseEntity="OrgDetail" syncable="YES"/>
+        <relationship name="contactToDonation" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="OrgDonation" inverseName="donationToContact" inverseEntity="OrgDonation" syncable="YES"/>
+        <relationship name="contactToView" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="OrgView" inverseName="viewToContact" inverseEntity="OrgView" syncable="YES"/>
+    </entity>
+    <entity name="OrgDetail" representedClassName="OrgDetail" syncable="YES">
+        <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="donateLink" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="siteLink" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="textLong" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="detailToContact" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="OrgContact" inverseName="contactToDetail" inverseEntity="OrgContact" syncable="YES"/>
+        <relationship name="detailToDonation" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="OrgDonation" inverseName="donationToDetail" inverseEntity="OrgDonation" syncable="YES"/>
+        <relationship name="detailToView" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="OrgView" inverseName="viewToDetail" inverseEntity="OrgView" syncable="YES"/>
+    </entity>
+    <entity name="OrgDonation" representedClassName="OrgDonation" syncable="YES">
+        <attribute name="firstDonation" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="latestDonation" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="totalAmount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="donationToContact" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="OrgContact" inverseName="contactToDonation" inverseEntity="OrgContact" syncable="YES"/>
+        <relationship name="donationToDetail" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="OrgDetail" inverseName="detailToDonation" inverseEntity="OrgDetail" syncable="YES"/>
+        <relationship name="donationToView" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="OrgView" inverseName="viewToDonation" inverseEntity="OrgView" syncable="YES"/>
+    </entity>
+    <entity name="OrgView" representedClassName="OrgView" syncable="YES">
+        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="textShort" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="viewToContact" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="OrgContact" inverseName="contactToView" inverseEntity="OrgContact" syncable="YES"/>
+        <relationship name="viewToDetail" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="OrgDetail" inverseName="detailToView" inverseEntity="OrgDetail" syncable="YES"/>
+        <relationship name="viewToDonation" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="OrgDonation" inverseName="donationToView" inverseEntity="OrgDonation" syncable="YES"/>
+        <relationship name="viewToUserOrg" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UserOrg" inverseName="userOrgToOrg" inverseEntity="UserOrg" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="userToDonation" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="UserDonation" inverseName="donationToUser" inverseEntity="UserDonation" syncable="YES"/>
+        <relationship name="userToUserOrg" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UserOrg" inverseName="userOrgToUser" inverseEntity="UserOrg" syncable="YES"/>
+    </entity>
+    <entity name="UserDonation" representedClassName="UserDonation" syncable="YES">
+        <attribute name="firstDonation" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="latestDonation" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="totalAmount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="donationToUser" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="User" inverseName="userToDonation" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="UserOrg" representedClassName="UserOrg" syncable="YES">
+        <attribute name="count" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="totalAmt" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="userOrgToOrg" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="OrgView" inverseName="viewToUserOrg" inverseEntity="OrgView" syncable="YES"/>
+        <relationship name="userOrgToUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="userToUserOrg" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="OrgContact" positionX="-2513" positionY="-3601" width="128" height="148"/>
+        <element name="OrgDetail" positionX="-2331" positionY="-3769" width="128" height="148"/>
+        <element name="OrgDonation" positionX="-2333" positionY="-3456" width="128" height="133"/>
+        <element name="OrgView" positionX="-2142" positionY="-3609" width="128" height="178"/>
+        <element name="User" positionX="-1773" positionY="-3582" width="128" height="133"/>
+        <element name="UserDonation" positionX="-1604" positionY="-3582" width="128" height="103"/>
+        <element name="UserOrg" positionX="-1964" positionY="-3564" width="128" height="103"/>
+    </elements>
+</model>
