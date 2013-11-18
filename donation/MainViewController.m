@@ -51,7 +51,10 @@
     _currentUser = [PFUser currentUser];
     
     self.currentCharityView.layer.zPosition = 2;
+    
     self.nextCharityView.layer.zPosition = 1;
+    self.nextCharityView.orgDescription.layer.borderWidth = 1.0f;
+    self.nextCharityView.orgDescription.layer.borderColor = [[UIColor grayColor] CGColor];
     
     PFQuery *orgQuery = [PFQuery queryWithClassName:@"OrgView"];
     
@@ -60,9 +63,8 @@
             // The find succeeded.
             NSLog(@"Successfully retrieved %d charities.", objects.count);
             self.charities = objects;
-            for (PFObject *object in objects) {
-                //NSLog(@"%@", object.objectId);
-            }
+            [self.currentCharityView configureCharityView];
+            [self.nextCharityView configureCharityView];
             PFObject *orgView = [self.charities objectAtIndex:_counter];
             self.currentCharity = orgView;
             [self.currentCharityView orgView:orgView setData:self];
@@ -305,6 +307,11 @@
     toCharity.orgLocation.text = fromCharity.orgLocation.text;
     toCharity.orgDescription.text = fromCharity.orgDescription.text;
     toCharity.orgImage.image = fromCharity.orgImage.image;
+}
+
+- (void)configureCharityViews
+{
+    
 }
 
 - (IBAction)logoutPressed:(id)sender

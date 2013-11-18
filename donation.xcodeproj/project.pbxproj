@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A802B970183A88C200AA4A05 /* hugIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = A802B96F183A88C200AA4A05 /* hugIcon.png */; };
+		A802B972183A8BEE00AA4A05 /* hugIcon3.png in Resources */ = {isa = PBXBuildFile; fileRef = A802B971183A8BEE00AA4A05 /* hugIcon3.png */; };
+		A802B976183A947500AA4A05 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = A802B975183A947500AA4A05 /* background.png */; };
+		A802B978183A975F00AA4A05 /* sandyWall2.png in Resources */ = {isa = PBXBuildFile; fileRef = A802B977183A975F00AA4A05 /* sandyWall2.png */; };
+		A802B97E183A99A400AA4A05 /* buttonBackground2.png in Resources */ = {isa = PBXBuildFile; fileRef = A802B97D183A99A400AA4A05 /* buttonBackground2.png */; };
+		A802B989183AC3AB00AA4A05 /* orgTab.png in Resources */ = {isa = PBXBuildFile; fileRef = A802B987183AC3AB00AA4A05 /* orgTab.png */; };
+		A802B98A183AC3AB00AA4A05 /* userTab.png in Resources */ = {isa = PBXBuildFile; fileRef = A802B988183AC3AB00AA4A05 /* userTab.png */; };
+		A802B98C183AC51200AA4A05 /* World_Times@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A802B98B183AC51200AA4A05 /* World_Times@2x.png */; };
+		A802B98E183AC53600AA4A05 /* Contact@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A802B98D183AC53600AA4A05 /* Contact@2x.png */; };
 		A8451131182C585F009CF83E /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8451130182C585F009CF83E /* Parse.framework */; };
 		A8451133182C58D7009CF83E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8451132182C58D7009CF83E /* AudioToolbox.framework */; };
 		A8451135182C58E0009CF83E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8451134182C58E0009CF83E /* CFNetwork.framework */; };
@@ -69,6 +78,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A802B96F183A88C200AA4A05 /* hugIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hugIcon.png; sourceTree = "<group>"; };
+		A802B971183A8BEE00AA4A05 /* hugIcon3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hugIcon3.png; sourceTree = "<group>"; };
+		A802B975183A947500AA4A05 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		A802B977183A975F00AA4A05 /* sandyWall2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sandyWall2.png; sourceTree = "<group>"; };
+		A802B97D183A99A400AA4A05 /* buttonBackground2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonBackground2.png; sourceTree = "<group>"; };
+		A802B987183AC3AB00AA4A05 /* orgTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orgTab.png; sourceTree = "<group>"; };
+		A802B988183AC3AB00AA4A05 /* userTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userTab.png; sourceTree = "<group>"; };
+		A802B98B183AC51200AA4A05 /* World_Times@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "World_Times@2x.png"; sourceTree = "<group>"; };
+		A802B98D183AC53600AA4A05 /* Contact@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Contact@2x.png"; sourceTree = "<group>"; };
 		A8451130182C585F009CF83E /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		A8451132182C58D7009CF83E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A8451134182C58E0009CF83E /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -259,6 +277,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A802B982183AA07D00AA4A05 /* CustomUI */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CustomUI;
+			sourceTree = "<group>";
+		};
 		A81D84681834992C00891587 /* MainViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -342,6 +367,7 @@
 		A863E20F1825801600840626 /* donation */ = {
 			isa = PBXGroup;
 			children = (
+				A802B982183AA07D00AA4A05 /* CustomUI */,
 				A84E471C1839E1790047EE19 /* HiddenFiles */,
 				A869489E183939E2002B6E18 /* Assets */,
 				A869489D18393995002B6E18 /* Settings */,
@@ -424,6 +450,15 @@
 		A869489E183939E2002B6E18 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				A802B98D183AC53600AA4A05 /* Contact@2x.png */,
+				A802B98B183AC51200AA4A05 /* World_Times@2x.png */,
+				A802B987183AC3AB00AA4A05 /* orgTab.png */,
+				A802B988183AC3AB00AA4A05 /* userTab.png */,
+				A802B97D183A99A400AA4A05 /* buttonBackground2.png */,
+				A802B977183A975F00AA4A05 /* sandyWall2.png */,
+				A802B975183A947500AA4A05 /* background.png */,
+				A802B971183A8BEE00AA4A05 /* hugIcon3.png */,
+				A802B96F183A88C200AA4A05 /* hugIcon.png */,
 				A863E2211825801600840626 /* Images.xcassets */,
 			);
 			name = Assets;
@@ -611,11 +646,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A802B97E183A99A400AA4A05 /* buttonBackground2.png in Resources */,
+				A802B978183A975F00AA4A05 /* sandyWall2.png in Resources */,
 				A863E2221825801600840626 /* Images.xcassets in Resources */,
+				A802B98E183AC53600AA4A05 /* Contact@2x.png in Resources */,
+				A802B976183A947500AA4A05 /* background.png in Resources */,
+				A802B970183A88C200AA4A05 /* hugIcon.png in Resources */,
+				A802B98A183AC3AB00AA4A05 /* userTab.png in Resources */,
+				A802B972183A8BEE00AA4A05 /* hugIcon3.png in Resources */,
 				A863E2141825801600840626 /* InfoPlist.strings in Resources */,
 				A8EE4D5C1832E25F00BDF618 /* importToDonator.sqlite in Resources */,
+				A802B989183AC3AB00AA4A05 /* orgTab.png in Resources */,
 				A863E21D1825801600840626 /* Main.storyboard in Resources */,
 				A8A80DDA18370369004EA42C /* FBUserSettingsViewResources.bundle in Resources */,
+				A802B98C183AC51200AA4A05 /* World_Times@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -779,7 +823,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -803,7 +846,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

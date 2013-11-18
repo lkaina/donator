@@ -27,6 +27,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UIImage *image = [UIImage imageNamed:@"sandyWall2.png"];
+    self.background.image = image;
+
 }
 
 - (void) viewDidAppear:(BOOL)animated

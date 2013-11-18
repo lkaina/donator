@@ -112,7 +112,7 @@ CGFloat const CPDOrgBarInitialX = 1.0f;
     titleStyle.fontName = @"Helvetica-Bold";
     titleStyle.fontSize = 14.0f;
     // 4 - Set up title
-    NSString *title = @"Charity Donations Data";
+    NSString *title = @"Top 5 Charities - All Users";
     graph.title = title;
     graph.titleTextStyle = titleStyle;
     graph.titlePlotAreaFrameAnchor = CPTRectAnchorTop;

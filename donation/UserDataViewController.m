@@ -118,7 +118,7 @@ CGFloat const CPDBarInitialX = 1.0f;
     titleStyle.fontName = @"Helvetica-Bold";
     titleStyle.fontSize = 14.0f;
     // 4 - Set up title
-    NSString *title = @"User Donations Data";
+    NSString *title = [NSString stringWithFormat:@"Top 5 Charities - %@", _currentUser[@"username"]];
     graph.title = title;
     graph.titleTextStyle = titleStyle;
     graph.titlePlotAreaFrameAnchor = CPTRectAnchorTop;
