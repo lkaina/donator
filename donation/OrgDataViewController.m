@@ -211,18 +211,18 @@ CGFloat const CPDOrgBarInitialX = 1.0f;
                 break;
                 
             case CPTBarPlotFieldBarTip:
+                num = 0;
                 if ([plot.identifier  isEqual: @"1st"]) {
                     num = [_top5 objectAtIndex:0][@"orgDonation"];
-                } else if ([plot.identifier  isEqual: @"2nd"]) {
-                    num = [_top5 objectAtIndex:0][@"orgDonation"];
-                } else if ([plot.identifier  isEqual: @"3rd"]) {
-                    num = [_top5 objectAtIndex:0][@"orgDonation"];
-                } else if ([plot.identifier  isEqual: @"4th"]) {
-                    num = [_top5 objectAtIndex:0][@"orgDonation"];
-                } else if ([plot.identifier  isEqual: @"5th"]) {
-                    num = [_top5 objectAtIndex:0][@"orgDonation"];
+                } else if ([_top5 count] > 1 && [plot.identifier  isEqual: @"2nd"]) {
+                    num = [_top5 objectAtIndex:1][@"orgDonation"];
+                } else if ([_top5 count] > 2 && [plot.identifier  isEqual: @"3rd"]) {
+                    num = [_top5 objectAtIndex:2][@"orgDonation"];
+                } else if ([_top5 count] > 3 && [plot.identifier  isEqual: @"4th"]) {
+                    num = [_top5 objectAtIndex:3][@"orgDonation"];
+                } else if ([_top5 count] > 4 && [plot.identifier  isEqual: @"5th"]) {
+                    num = [_top5 objectAtIndex:4][@"orgDonation"];
                 }
-                
                 NSLog(@"tip: %@", num);
                 break;
         }

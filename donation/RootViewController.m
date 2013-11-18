@@ -52,7 +52,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)loginViewController:(LoginViewController *)controller verifiedLogin:(NSString *)username

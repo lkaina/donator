@@ -32,6 +32,7 @@
 
 {
     NSArray *_top5;
+    PFUser *_currentUser;
 }
 
 CGFloat const CPDBarWidth = 1.0f;
@@ -59,10 +60,13 @@ CGFloat const CPDBarInitialX = 1.0f;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.noDataLabel.hidden = YES;
     hostView_.hidden = NO;
     
+    _currentUser = [PFUser currentUser];
     PFQuery *query = [PFQuery queryWithClassName:@"UserOrg"];
+    [query whereKey:@"user" equalTo:_currentUser];
     [query orderByDescending:@"donation"];
     [query addDescendingOrder:@"updatedAt"];
     query.limit = 5;
@@ -139,9 +143,9 @@ CGFloat const CPDBarInitialX = 1.0f;
     self.thirdPlot = [CPTBarPlot tubularBarPlotWithColor:[CPTColor blueColor] horizontalBars:YES];
     self.thirdPlot.identifier = @"3rd";
     self.fourthPlot = [CPTBarPlot tubularBarPlotWithColor:[CPTColor yellowColor] horizontalBars:YES];
-    self.fourthPlot.identifier = @"2nd";
+    self.fourthPlot.identifier = @"4th";
     self.fifthPlot = [CPTBarPlot tubularBarPlotWithColor:[CPTColor orangeColor] horizontalBars:YES];
-    self.fifthPlot.identifier = @"3rd";
+    self.fifthPlot.identifier = @"5th";
 
     
     // 2 - Set up line style
@@ -213,7 +217,19 @@ CGFloat const CPDBarInitialX = 1.0f;
                 break;
                 
             case CPTBarPlotFieldBarTip:
-                num = [_top5 objectAtIndex:index][@"donation"];
+                num = 0;
+                if ([plot.identifier  isEqual: @"1st"]) {
+                    num = [_top5 objectAtIndex:0][@"donation"];
+                } else if ([_top5 count] > 1 && [plot.identifier  isEqual: @"2nd"]) {
+                    num = [_top5 objectAtIndex:1][@"donation"];
+                } else if ([_top5 count] > 2 && [plot.identifier  isEqual: @"3rd"]) {
+                    num = [_top5 objectAtIndex:2][@"donation"];
+                } else if ([_top5 count] > 3 && [plot.identifier  isEqual: @"4th"]) {
+                    num = [_top5 objectAtIndex:3][@"donation"];
+                } else if ([_top5 count] > 4 && [plot.identifier  isEqual: @"5th"]) {
+                    num = [_top5 objectAtIndex:4][@"donation"];
+                }
+                
                 NSLog(@"tip: %@", num);
                 break;
         }
