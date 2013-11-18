@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *siteLink;
 @property (weak, nonatomic) IBOutlet UIButton *donateLink;
 @property (weak, nonatomic) IBOutlet UITextView *detDescription;
+@property (weak, nonatomic) IBOutlet UIImageView *icon;
 
 @property (weak, nonatomic) PFObject *charity;
 //@property (weak, nonatomic) OrgView *charity;

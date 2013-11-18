@@ -58,10 +58,10 @@
     [orgQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             // The find succeeded.
-            NSLog(@"Successfully retrieved %d scores.", objects.count);
+            NSLog(@"Successfully retrieved %d charities.", objects.count);
             self.charities = objects;
             for (PFObject *object in objects) {
-                NSLog(@"%@", object.objectId);
+                //NSLog(@"%@", object.objectId);
             }
             PFObject *orgView = [self.charities objectAtIndex:_counter];
             self.currentCharity = orgView;

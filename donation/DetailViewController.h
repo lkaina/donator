@@ -12,6 +12,7 @@
 
 @interface DetailViewController : UIViewController
 
+
 @property (weak, nonatomic) IBOutlet CharityView *charityView;
 @property (weak, nonatomic) PFObject *charity;
 

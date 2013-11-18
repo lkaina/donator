@@ -49,7 +49,7 @@
     self.orgName.text = charity[@"name"];
     self.orgLocation.text = [NSString stringWithFormat:@"%@, %@", charity[@"city"], charity[@"state"]];
     self.orgDescription.text  = charity[@"textShort"];
-    NSURL * imageURL = [NSURL URLWithString:charity[@"image"]];
+    NSURL * imageURL = [NSURL URLWithString:charity[@"icon"]];
     NSData * imageData = [NSData dataWithContentsOfURL:imageURL];
     UIImage *image = [UIImage imageWithData:imageData];
     self.orgImage.image = image;
@@ -60,10 +60,13 @@
     self.orgName.text = self.charity[@"name"];
     self.orgLocation.text = [NSString stringWithFormat:@"%@, %@", self.charity[@"city"], self.charity[@"state"]];
     
-    //    self.siteLink.text = charityDetail.siteLink;
     [self.siteLink setTitle:self.charity[@"siteLink"] forState:UIControlStateNormal];
     [self.donateLink setTitle:self.charity[@"donateLink"] forState:UIControlStateNormal];
     self.detDescription.text = self.charity[@"textLong"];
+    NSURL * imageURL = [NSURL URLWithString:self.charity[@"icon"]];
+    NSData * imageData = [NSData dataWithContentsOfURL:imageURL];
+    UIImage *image = [UIImage imageWithData:imageData];
+    self.icon.image = image;
 }
 
 - (IBAction)siteLinkPressed:(id)sender
