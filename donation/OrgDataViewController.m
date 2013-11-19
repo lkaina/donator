@@ -59,8 +59,15 @@ CGFloat const CPDOrgBarInitialX = 1.0f;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.noDataLabel.hidden = YES;
+    
+    self.loadSpinOrg.hidden = NO;
+    self.loadLabelOrg.hidden = NO;
     hostView_.hidden = NO;
+    CGAffineTransform transform = CGAffineTransformMakeScale(3.0f, 3.0f);
+    self.loadSpinOrg.transform = transform;
+    [self.loadSpinOrg startAnimating];
+    
+    self.noDataLabel.hidden = YES;
     
     PFQuery *query = [PFQuery queryWithClassName:@"OrgView"];
     [query orderByDescending:@"orgDonation"];
@@ -69,12 +76,17 @@ CGFloat const CPDOrgBarInitialX = 1.0f;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (error) {
             NSLog(@"Error retrieving query data");
-        } else if (![objects count]) {
-            self.noDataLabel.hidden = NO;
-            hostView_.hidden = YES;
         } else {
-            _top5 = objects;
-            [self initPlot];
+            [self.loadSpinOrg stopAnimating];
+            self.loadSpinOrg.hidden = YES;
+            self.loadLabelOrg.hidden = YES;
+            if (![objects count]) {
+                self.noDataLabel.hidden = NO;
+                hostView_.hidden = YES;
+            } else {
+                _top5 = objects;
+                [self initPlot];
+            }
         }
     }];
 }
@@ -161,6 +173,10 @@ CGFloat const CPDOrgBarInitialX = 1.0f;
         [graph addPlot:plot toPlotSpace:graph.defaultPlotSpace];
         barX -= 0.15f;
     }
+    
+    CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *) graph.defaultPlotSpace;
+    [plotSpace scaleToFitPlots:[NSArray arrayWithObjects:self.firstPlot, self.secondPlot, self.thirdPlot, self.fourthPlot, self.fifthPlot, nil]];
+    
 }
 
 -(void)configureAxes
@@ -187,11 +203,6 @@ CGFloat const CPDOrgBarInitialX = 1.0f;
     axisSet.yAxis.titleTextStyle = axisTitleStyle;
     axisSet.yAxis.titleOffset = 5.0f;
     axisSet.yAxis.axisLineStyle = axisLineStyle;
-}
-
--(void)hideAnnotation:(CPTGraph *)graph
-{
-    
 }
 
 #pragma mark - CPTPlotDataSource methods
@@ -234,6 +245,38 @@ CGFloat const CPDOrgBarInitialX = 1.0f;
 #pragma mark - CPTBarPlotDelegate methods
 -(void)barPlot:(CPTBarPlot *)plot barWasSelectedAtRecordIndex:(NSUInteger)index
 {
+    self.colorBox.layer.borderWidth = 1.0f;
+    self.colorBox.layer.borderColor = [[UIColor blackColor] CGColor];
+    
+    float donationAmt;
+    
+    if ([plot.identifier isEqual:@"1st"]) {
+        self.orgName.text = [_top5 objectAtIndex:0][@"name"];
+        donationAmt = [[[_top5 objectAtIndex:0] objectForKey:@"orgDonation"] floatValue] * 0.01;
+        self.orgDonationAmount.text = [NSString stringWithFormat:@"Total contributions: $%.02f",donationAmt];
+        self.colorBox.layer.backgroundColor = [[UIColor redColor] CGColor];
+    } else if ([_top5 count] > 1 && [plot.identifier isEqual:@"2nd"]) {
+        self.orgName.text = [_top5 objectAtIndex:1][@"name"];
+        donationAmt = [[[_top5 objectAtIndex:1] objectForKey:@"orgDonation"] floatValue] * 0.01;
+        self.orgDonationAmount.text = [NSString stringWithFormat:@"Total contributions: $%.02f",donationAmt];
+        self.colorBox.layer.backgroundColor = [[UIColor greenColor] CGColor];
+    } else if ([_top5 count] > 2 && [plot.identifier isEqual:@"3rd"]) {
+        self.orgName.text = [_top5 objectAtIndex:2][@"name"];
+        donationAmt = [[[_top5 objectAtIndex:2] objectForKey:@"orgDonation"] floatValue] * 0.01;
+        self.orgDonationAmount.text = [NSString stringWithFormat:@"Total contributions: $%.02f",donationAmt];
+        self.colorBox.layer.backgroundColor = [[UIColor blueColor] CGColor];
+    } else if ([_top5 count] > 3 && [plot.identifier isEqual:@"4th"]) {
+        self.orgName.text = [_top5 objectAtIndex:3][@"name"];
+        donationAmt = [[[_top5 objectAtIndex:3] objectForKey:@"orgDonation"] floatValue] * 0.01;
+        self.orgDonationAmount.text = [NSString stringWithFormat:@"Total contributions: $%.02f",donationAmt];
+        self.colorBox.layer.backgroundColor = [[UIColor yellowColor] CGColor];
+    } else if ([_top5 count] > 4 && [plot.identifier isEqual:@"5th"]) {
+        self.orgName.text = [_top5 objectAtIndex:4][@"name"];
+        donationAmt = [[[_top5 objectAtIndex:4] objectForKey:@"orgDonation"] floatValue] * 0.01;
+        self.orgDonationAmount.text = [NSString stringWithFormat:@"Total contributions: $%.02f",donationAmt];
+        self.colorBox.layer.backgroundColor = [[UIColor orangeColor] CGColor];
+    }
+    /*
     // 1 - Is the plot hidden?
     if (plot.isHidden == YES) {
         return;
@@ -275,6 +318,7 @@ CGFloat const CPDOrgBarInitialX = 1.0f;
     self.priceAnnotation.anchorPlotPoint = [NSArray arrayWithObjects:anchorX, anchorY, nil];
     // 8 - Add the annotation
     [plot.graph.plotAreaFrame.plotArea addAnnotation:self.priceAnnotation];
+     */
 }
 
 - (IBAction)donePressed:(id)sender

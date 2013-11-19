@@ -12,10 +12,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="QzV-A8-sf8">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2K3-k2-6tK">
                                 <rect key="frame" x="120" y="394" width="80" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -62,7 +58,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="7RI-L1-LR7"/>
                     <connections>
-                        <outlet property="background" destination="QzV-A8-sf8" id="vqU-qI-vc6"/>
                         <outlet property="inputPassword" destination="oX6-Ng-ceJ" id="Knd-ib-Lo0"/>
                         <outlet property="inputUsername" destination="6Oy-zG-rJf" id="t9G-sT-hZr"/>
                         <outlet property="loginButton" destination="2K3-k2-6tK" id="JFE-uS-3Us"/>
@@ -224,16 +219,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3yb-IT-VMn">
-                                <rect key="frame" x="0.0" y="518" width="320" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Data">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="3th-yr-b56" kind="modal" identifier="mainToData" id="jeL-M8-Emk"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" id="4Xo-iq-uVL" userLabel="Next Charity" customClass="CharityView">
                                 <rect key="frame" x="0.0" y="64" width="320" height="454"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -308,15 +293,34 @@
                                     <outlet property="orgName" destination="sw8-Lb-6my" id="m40-Ib-ENp"/>
                                 </connections>
                             </view>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3yb-IT-VMn">
+                                <rect key="frame" x="0.0" y="517" width="320" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="bar-32.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="3th-yr-b56" kind="modal" identifier="mainToData" id="jeL-M8-Emk"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please wait a moment while charity data loads" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3sp-qY-DEz">
+                                <rect key="frame" x="60" y="204" width="200" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="9Gh-Lf-yk7">
+                                <rect key="frame" x="150" y="274" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                     </view>
                     <navigationItem key="navigationItem" id="h4w-DQ-sWh">
-                        <barButtonItem key="leftBarButtonItem" title="Settings" id="vSY-eI-maA">
+                        <barButtonItem key="leftBarButtonItem" id="vSY-eI-maA">
                             <connections>
                                 <action selector="settingsPressed:" destination="0bG-Yo-tB2" id="vX8-uT-H40"/>
-                                <segue destination="Qdy-aC-oqO" kind="modal" id="hy8-Hw-EJy"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Logout" id="R86-HL-fOg">
@@ -328,6 +332,8 @@
                     <connections>
                         <outlet property="currentCharityView" destination="ldF-hu-5ZY" id="EBh-cZ-08z"/>
                         <outlet property="dataPressed" destination="3yb-IT-VMn" id="xEo-op-aqW"/>
+                        <outlet property="loadLabelMain" destination="3sp-qY-DEz" id="g5i-Fv-6cH"/>
+                        <outlet property="loadSpinMain" destination="9Gh-Lf-yk7" id="anu-2k-GTS"/>
                         <outlet property="nextCharityView" destination="4Xo-iq-uVL" id="3TR-Cr-aTB"/>
                         <segue destination="v93-bn-oyO" kind="modal" identifier="mainToDetail" modalTransitionStyle="flipHorizontal" id="wDH-x2-qbc"/>
                     </connections>
@@ -387,10 +393,39 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" id="xtP-5v-NPR" customClass="CPTGraphHostingView">
-                                <rect key="frame" x="15" y="91" width="290" height="303"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="328"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please wait a moment while charity data loads." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="V58-Y5-YO6">
+                                <rect key="frame" x="59.5" y="204" width="200" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="Ehz-2Y-Q0c">
+                                <rect key="frame" x="150" y="274" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="E9S-Ym-dRb">
+                                <rect key="frame" x="16" y="436.5" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vEg-nW-s3Q">
+                                <rect key="frame" x="50" y="407" width="257" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iyq-jC-ODw">
+                                <rect key="frame" x="50" y="451.5" width="257" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -402,8 +437,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="colorBox" destination="E9S-Ym-dRb" id="yH1-tm-Kjq"/>
                         <outlet property="hostView" destination="xtP-5v-NPR" id="wre-TD-7Yz"/>
+                        <outlet property="loadLabelUser" destination="V58-Y5-YO6" id="O9j-X7-bNG"/>
+                        <outlet property="loadSpinUser" destination="Ehz-2Y-Q0c" id="vlr-VT-fOg"/>
                         <outlet property="noDataLabel" destination="KDA-7A-e5h" id="tDg-uL-NWu"/>
+                        <outlet property="orgDonationAmount" destination="iyq-jC-ODw" id="x4e-zq-0PX"/>
+                        <outlet property="orgName" destination="vEg-nW-s3Q" id="HGj-6i-bR0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wg0-qS-Vfn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -444,23 +484,57 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" id="x4M-Aq-eAw" customClass="CPTGraphHostingView">
-                                <rect key="frame" x="15" y="90.5" width="290" height="303"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="328"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please wait a moment while charity data loads." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AUQ-Iy-prI">
+                                <rect key="frame" x="59.5" y="204" width="200" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="Mfx-eJ-qTf">
+                                <rect key="frame" x="150" y="274" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WgP-gQ-nnS">
+                                <rect key="frame" x="16" y="436" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9i4-4S-q9v">
+                                <rect key="frame" x="50.5" y="407" width="257" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PAo-yh-kdW">
+                                <rect key="frame" x="50.5" y="451" width="257" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Charity Data" id="hsf-Zb-Q0E">
-                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="uIM-Xr-knJ">
+                    <navigationItem key="navigationItem" title="Charity Data" id="Bd6-Mv-rM5">
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="qay-zJ-TPy">
                             <connections>
-                                <action selector="donePressed:" destination="ezT-Np-O2K" id="hTi-jq-4iH"/>
+                                <action selector="donePressed:" destination="ezT-Np-O2K" id="UVV-Ij-BP0"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="colorBox" destination="WgP-gQ-nnS" id="Ujp-KV-oCz"/>
                         <outlet property="hostView" destination="x4M-Aq-eAw" id="WEY-yk-8FG"/>
-                        <outlet property="noDataLabel" destination="x4M-Aq-eAw" id="UL7-Ih-MBI"/>
+                        <outlet property="loadLabelOrg" destination="AUQ-Iy-prI" id="3IZ-Dc-Une"/>
+                        <outlet property="loadSpinOrg" destination="Mfx-eJ-qTf" id="dD9-UQ-RY8"/>
+                        <outlet property="noDataLabel" destination="smL-VE-Xqu" id="kN0-pl-Ej7"/>
+                        <outlet property="orgDonationAmount" destination="PAo-yh-kdW" id="RiQ-7z-L7R"/>
+                        <outlet property="orgName" destination="9i4-4S-q9v" id="hZu-Sm-YYj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gfM-2a-GUw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -496,8 +570,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Register" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Def-4t-4rq">
-                                <rect key="frame" x="32" y="40" width="64" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Registration" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Def-4t-4rq">
+                                <rect key="frame" x="32" y="40" width="93" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
@@ -592,7 +666,7 @@
         <scene sceneID="CId-ar-soI">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1WB-vf-Ai8" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="User" image="Contact.png" id="3dF-Rm-Voz"/>
+                    <tabBarItem key="tabBarItem" title="User" image="angel-32.png" id="3dF-Rm-Voz"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="h5K-d0-ghi">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -611,7 +685,7 @@
         <scene sceneID="6Wh-jT-ROK">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="U14-rk-JEN" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Charities" image="World_Times.png" id="sEx-Et-Lgu"/>
+                    <tabBarItem key="tabBarItem" title="Charities" image="conference-48.png" id="sEx-Et-Lgu"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Kcs-Wc-DOC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -665,8 +739,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Contact.png" width="25" height="25"/>
-        <image name="World_Times.png" width="25" height="25"/>
+        <image name="angel-32.png" width="32" height="32"/>
+        <image name="bar-32.png" width="32" height="32"/>
+        <image name="conference-48.png" width="48" height="48"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

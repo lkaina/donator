@@ -46,21 +46,28 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationItem.hidesBackButton = YES;
+    self.loadLabelMain.hidden = NO;
+    self.loadSpinMain.hidden = NO;
+    CGAffineTransform transform = CGAffineTransformMakeScale(3.0f, 3.0f);
+    self.loadSpinMain.transform = transform;
+    [self.loadSpinMain startAnimating];
+    
     self.navigationController.navigationBarHidden = NO;
     _counter = 0;
     _currentUser = [PFUser currentUser];
-    
-    self.currentCharityView.layer.zPosition = 2;
-    
-    self.nextCharityView.layer.zPosition = 1;
-    self.nextCharityView.orgDescription.layer.borderWidth = 1.0f;
-    self.nextCharityView.orgDescription.layer.borderColor = [[UIColor grayColor] CGColor];
+        
+//    self.currentCharityView.layer.zPosition = 2;
+//    self.nextCharityView.layer.zPosition = 1;
     
     PFQuery *orgQuery = [PFQuery queryWithClassName:@"OrgView"];
     
     [orgQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            // The find succeeded.
+            [self.loadSpinMain stopAnimating];
+            self.loadSpinMain.hidden = YES;
+            self.loadLabelMain.hidden = YES;
+            self.dataPressed.hidden = NO;
             NSLog(@"Successfully retrieved %d charities.", objects.count);
             self.charities = objects;
             [self.currentCharityView configureCharityView];

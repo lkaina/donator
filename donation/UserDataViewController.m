@@ -61,8 +61,14 @@ CGFloat const CPDBarInitialX = 1.0f;
 {
     [super viewDidLoad];
     
-    self.noDataLabel.hidden = YES;
+    self.loadSpinUser.hidden = NO;
+    self.loadLabelUser.hidden = NO;
     hostView_.hidden = NO;
+    CGAffineTransform transform = CGAffineTransformMakeScale(3.0f, 3.0f);
+    self.loadSpinUser.transform = transform;
+    [self.loadSpinUser startAnimating];
+    
+    self.noDataLabel.hidden = YES;
     
     _currentUser = [PFUser currentUser];
     PFQuery *query = [PFQuery queryWithClassName:@"UserOrg"];
@@ -74,13 +80,17 @@ CGFloat const CPDBarInitialX = 1.0f;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (error) {
             NSLog(@"Error retrieving query data");
-        } else if (![objects count]) {
-            self.noDataLabel.hidden = NO;
-            hostView_.hidden = YES;
-            NSLog(@"No Data Available");
-        } else {
-            _top5 = objects;
-            [self initPlot];
+        } else{
+            [self.loadSpinUser stopAnimating];
+            self.loadSpinUser.hidden = YES;
+            self.loadLabelUser.hidden = YES;
+            if (![objects count]) {
+                self.noDataLabel.hidden = NO;
+                hostView_.hidden = YES;
+            } else {
+                _top5 = objects;
+                [self initPlot];
+            }
         }
     }];
 }
@@ -124,13 +134,12 @@ CGFloat const CPDBarInitialX = 1.0f;
     graph.titlePlotAreaFrameAnchor = CPTRectAnchorTop;
     graph.titleDisplacement = CGPointMake(0.0f, -16.0f);
     // 5 - Set up plot space
-    CGFloat xMin = 0.0f;
-    CGFloat xMax = 10.0f;
-    CGFloat yMin = 0.0f;
-    CGFloat yMax = 1.0f;  // should determine dynamically based on max price
-    CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *) graph.defaultPlotSpace;
-    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(xMin) length:CPTDecimalFromFloat(xMax)];
-    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(yMin) length:CPTDecimalFromFloat(yMax)];
+//    CGFloat xMin = 0.0f;
+//    CGFloat xMax = 10.0f;
+//    CGFloat yMin = 0.0f;
+//    CGFloat yMax = 1.0f;  // should determine dynamically based on max price
+//    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(xMin) length:CPTDecimalFromFloat(xMax)];
+//    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(yMin) length:CPTDecimalFromFloat(yMax)];
 }
 
 -(void)configurePlots
@@ -146,14 +155,13 @@ CGFloat const CPDBarInitialX = 1.0f;
     self.fourthPlot.identifier = @"4th";
     self.fifthPlot = [CPTBarPlot tubularBarPlotWithColor:[CPTColor orangeColor] horizontalBars:YES];
     self.fifthPlot.identifier = @"5th";
-
     
+    CPTGraph *graph = self.hostView.hostedGraph;
     // 2 - Set up line style
     CPTMutableLineStyle *barLineStyle = [[CPTMutableLineStyle alloc] init];
     barLineStyle.lineColor = [CPTColor lightGrayColor];
     barLineStyle.lineWidth = 0.5;
     // 3 - Add plots to graph
-    CPTGraph *graph = self.hostView.hostedGraph;
     CGFloat barX = 0.6f;
     CGFloat barWidth = 0.1f;
     NSArray *plots = [NSArray arrayWithObjects:self.firstPlot, self.secondPlot, self.thirdPlot, self.fourthPlot, self.fifthPlot, nil];
@@ -167,6 +175,10 @@ CGFloat const CPDBarInitialX = 1.0f;
         [graph addPlot:plot toPlotSpace:graph.defaultPlotSpace];
         barX -= 0.15f;
     }
+
+    CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *) graph.defaultPlotSpace;
+    [plotSpace scaleToFitPlots:[NSArray arrayWithObjects:self.firstPlot, self.secondPlot, self.thirdPlot, self.fourthPlot, self.fifthPlot, nil]];
+    
 }
 
 -(void)configureAxes
@@ -241,6 +253,38 @@ CGFloat const CPDBarInitialX = 1.0f;
 #pragma mark - CPTBarPlotDelegate methods
 -(void)barPlot:(CPTBarPlot *)plot barWasSelectedAtRecordIndex:(NSUInteger)index
 {
+    self.colorBox.layer.borderWidth = 1.0f;
+    self.colorBox.layer.borderColor = [[UIColor blackColor] CGColor];
+    
+    float donationAmt;
+    
+    if ([plot.identifier isEqual:@"1st"]) {
+        self.orgName.text = [_top5 objectAtIndex:0][@"org"][@"name"];
+        donationAmt = [[[_top5 objectAtIndex:0] objectForKey:@"donation"] floatValue] * 0.01;
+        self.orgDonationAmount.text = [NSString stringWithFormat:@"Total contributions: $%.02f",donationAmt];
+        self.colorBox.layer.backgroundColor = [[UIColor redColor] CGColor];
+    } else if ([_top5 count] > 1 && [plot.identifier isEqual:@"2nd"]) {
+        self.orgName.text = [_top5 objectAtIndex:1][@"org"][@"name"];
+        donationAmt = [[[_top5 objectAtIndex:1] objectForKey:@"donation"] floatValue] * 0.01;
+        self.orgDonationAmount.text = [NSString stringWithFormat:@"Total contributions: $%.02f",donationAmt];
+        self.colorBox.layer.backgroundColor = [[UIColor greenColor] CGColor];
+    } else if ([_top5 count] > 2 && [plot.identifier isEqual:@"3rd"]) {
+        self.orgName.text = [_top5 objectAtIndex:2][@"org"][@"name"];
+        donationAmt = [[[_top5 objectAtIndex:2] objectForKey:@"donation"] floatValue] * 0.01;
+        self.orgDonationAmount.text = [NSString stringWithFormat:@"Total contributions: $%.02f",donationAmt];
+        self.colorBox.layer.backgroundColor = [[UIColor blueColor] CGColor];
+    } else if ([_top5 count] > 3 && [plot.identifier isEqual:@"4th"]) {
+        self.orgName.text = [_top5 objectAtIndex:3][@"org"][@"name"];
+        donationAmt = [[[_top5 objectAtIndex:3] objectForKey:@"donation"] floatValue] * 0.01;
+        self.orgDonationAmount.text = [NSString stringWithFormat:@"Total contributions: $%.02f",donationAmt];
+        self.colorBox.layer.backgroundColor = [[UIColor yellowColor] CGColor];
+    } else if ([_top5 count] > 4 && [plot.identifier isEqual:@"5th"]) {
+        self.orgName.text = [_top5 objectAtIndex:4][@"org"][@"name"];
+        donationAmt = [[[_top5 objectAtIndex:4] objectForKey:@"donation"] floatValue] * 0.01;
+        self.orgDonationAmount.text = [NSString stringWithFormat:@"Total contributions: $%.02f",donationAmt];
+        self.colorBox.layer.backgroundColor = [[UIColor orangeColor] CGColor];
+    }
+    /*
     // 1 - Is the plot hidden?
     if (plot.isHidden == YES) {
         return;
@@ -282,6 +326,7 @@ CGFloat const CPDBarInitialX = 1.0f;
     self.priceAnnotation.anchorPlotPoint = [NSArray arrayWithObjects:anchorX, anchorY, nil];
     // 8 - Add the annotation 
     [plot.graph.plotAreaFrame.plotArea addAnnotation:self.priceAnnotation];
+     */
 }
 
 - (IBAction)donePressed:(id)sender

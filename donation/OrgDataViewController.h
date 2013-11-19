@@ -13,6 +13,13 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *noDataLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *loadLabelOrg;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadSpinOrg;
+
+@property (weak, nonatomic) IBOutlet UILabel *orgName;
+@property (weak, nonatomic) IBOutlet UILabel *orgDonationAmount;
+@property (weak, nonatomic) IBOutlet UILabel *colorBox;
+
 - (IBAction)donePressed:(id)sender;
 
 @end

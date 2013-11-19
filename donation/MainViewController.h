@@ -33,11 +33,12 @@
 //@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 
 @property (weak, nonatomic) IBOutlet UIButton *dataPressed;
+@property (weak, nonatomic) IBOutlet UILabel *loadLabelMain;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadSpinMain;
 
 @property (weak, nonatomic) id<MainViewControllerDelegate> delegate;
 
 - (IBAction)logoutPressed:(id)sender;
 - (IBAction)settingsPressed:(id)sender;
-- (IBAction)dataPressed:(id)sender;
 
 @end
